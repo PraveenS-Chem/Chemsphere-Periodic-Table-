@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Periodic Table Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="#" class="logo" aria-label="Periodic Table Hub home">
+        <span class="logo-symbol">Pt</span>
+        <span class="logo-text">
+          <span class="logo-title">Periodic Table</span>
+          <span class="logo-sub">Hub</span>
+        </span>
+      </a>
+
+      <!-- Search -->
+      <div class="search-wrap" role="search">
+        <label for="search-input" class="sr-only">Search elements by name, symbol, or atomic number</label>
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search element, symbol, or atomic number…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <kbd class="search-kbd" aria-hidden="true">/</kbd>
+        </div>
+        <!-- Dropdown results -->
+        <div class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></div>
+      </div>
+
+      <!-- Header actions -->
+      <div class="header-actions">
+        <!-- Dark mode toggle -->
+        <button
+          class="icon-btn theme-toggle"
+          id="theme-toggle"
+          aria-label="Switch to light mode"
+          title="Toggle dark mode"
+        >
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 0010 9.79z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- Mobile sidebar toggle -->
+        <button
+          class="icon-btn sidebar-toggle"
+          id="sidebar-toggle"
+          aria-label="Open element details"
+          aria-expanded="false"
+          aria-controls="sidebar"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+            <rect x="3" y="14" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+            <rect x="13" y="5" width="8" height="14" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════ MAIN LAYOUT -->
+  <div class="layout" id="layout">
+
+    <!-- ═══════════ MAIN CONTENT AREA -->
+    <main class="main-content" id="main-content">
+
+      <!-- Hero / intro banner -->
+      <section class="hero-band" aria-label="Introduction">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          118 elements · interactive reference
+        </div>
+        <h1 class="hero-headline">
+          Explore the<br/>
+          <em>Building Blocks</em><br/>
+          of Matter
+        </h1>
+        <p class="hero-body">
+          Tap any element to inspect its properties, Bohr model, electron
+          configuration, and real-world uses. Use the concept library to
+          understand the underlying principles.
+        </p>
+        <div class="hero-stats" aria-label="Quick stats">
+          <div class="stat">
+            <span class="stat-value">118</span>
+            <span class="stat-label">Elements</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat-value">10</span>
+            <span class="stat-label">Concepts</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat-value">7</span>
+            <span class="stat-label">Periods</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat-value">18</span>
+            <span class="stat-label">Groups</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category legend -->
+      <section class="legend-section" aria-label="Element categories">
+        <h2 class="section-label">Categories</h2>
+        <div class="legend-grid" id="legend-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Periodic table grid -->
+      <section class="table-section" aria-label="Periodic table" id="table-section">
+        <h2 class="section-label">Periodic Table</h2>
+        <div class="periodic-wrap" id="periodic-wrap">
+          <div class="periodic-grid" id="periodic-grid" role="grid" aria-label="Periodic table of elements">
+            <!-- Populated by JS (GridModule) -->
+          </div>
+          <div class="periodic-loading" id="periodic-loading">Loading element data…</div>
+        </div>
+      </section>
+
+      <!-- Quick-access concept strip -->
+      <section class="concepts-strip" aria-label="Concept learning center">
+        <div class="concepts-strip-header">
+          <h2 class="section-label">Concept Library</h2>
+          <a href="#" class="link-arrow">View all <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="concept-cards" id="concept-cards">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ═══════════ SIDEBAR -->
+    <aside class="sidebar" id="sidebar" aria-label="Element details">
+
+      <!-- Sidebar header -->
+      <div class="sidebar-header">
+        <h2 class="sidebar-title" id="sidebar-title">Element Details</h2>
+        <button
+          class="icon-btn sidebar-close"
+          id="sidebar-close"
+          aria-label="Close element details"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Empty / default state -->
+      <div class="sidebar-empty" id="sidebar-empty">
+        <div class="empty-orb" aria-hidden="true">
+          <div class="orb-ring orb-ring-1"></div>
+          <div class="orb-ring orb-ring-2"></div>
+          <div class="orb-ring orb-ring-3"></div>
+          <div class="orb-nucleus"></div>
+        </div>
+        <p class="empty-title">No element selected</p>
+        <p class="empty-body">Click any element on the periodic table to explore its properties, electron configuration, and Bohr model.</p>
+      </div>
+
+      <!-- Element detail panel (hidden until element selected) -->
+      <div class="sidebar-detail" id="sidebar-detail" hidden>
+
+        <!-- Element hero -->
+        <div class="el-hero" id="el-hero">
+          <div class="el-symbol-block">
+            <span class="el-number" id="el-number">—</span>
+            <span class="el-symbol" id="el-symbol">—</span>
+            <span class="el-mass" id="el-mass">—</span>
+          </div>
+          <div class="el-meta">
+            <h3 class="el-name" id="el-name">—</h3>
+            <span class="el-category-badge" id="el-category-badge">—</span>
+            <span class="el-block-badge" id="el-block-badge">—</span>
+          </div>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="tab-bar" role="tablist" aria-label="Element information tabs">
+          <button class="tab active" role="tab" aria-selected="true"  aria-controls="tab-properties"  id="btn-properties" data-tab="properties">Properties</button>
+          <button class="tab"        role="tab" aria-selected="false" aria-controls="tab-config"     id="btn-config"     data-tab="config">Config</button>
+          <button class="tab"        role="tab" aria-selected="false" aria-controls="tab-bohr"       id="btn-bohr"       data-tab="bohr">Bohr Model</button>
+          <button class="tab"        role="tab" aria-selected="false" aria-controls="tab-uses"       id="btn-uses"       data-tab="uses">Uses</button>
+        </div>
+
+        <!-- Tab: Properties -->
+        <div class="tab-panel active" role="tabpanel" id="tab-properties" aria-labelledby="btn-properties">
+          <dl class="prop-list" id="prop-list">
+            <!-- Populated by JS -->
+          </dl>
+        </div>
+
+        <!-- Tab: Electron Config -->
+        <div class="tab-panel" role="tabpanel" id="tab-config" aria-labelledby="btn-config" hidden>
+          <div class="config-block" id="config-block">
+            <p class="config-string" id="config-string">—</p>
+            <div class="subshell-grid" id="subshell-grid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Bohr Model -->
+        <div class="tab-panel" role="tabpanel" id="tab-bohr" aria-labelledby="btn-bohr" hidden>
+          <div class="bohr-wrap" id="bohr-wrap">
+            <svg class="bohr-svg" id="bohr-svg" viewBox="0 0 280 280" aria-label="Bohr model diagram">
+              <!-- Populated by JS -->
+            </svg>
+            <div class="bohr-legend" id="bohr-legend"></div>
+          </div>
+        </div>
+
+        <!-- Tab: Uses -->
+        <div class="tab-panel" role="tabpanel" id="tab-uses" aria-labelledby="btn-uses" hidden>
+          <ul class="uses-list" id="uses-list">
+            <!-- Populated by JS -->
+          </ul>
+          <div class="discovery-block" id="discovery-block">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Compare CTA -->
+        <div class="compare-cta">
+          <button class="btn-compare" id="btn-compare" aria-label="Add this element to compare">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Add to Compare
+          </button>
+        </div>
+
+      </div><!-- /sidebar-detail -->
+
+    </aside><!-- /sidebar -->
+
+  </div><!-- /layout -->
+
+  <!-- ═══════════════════════════════════════════ OVERLAY (mobile) -->
+  <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════ TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ═══════════════════════════════════════════ FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-logo">Periodic Table Hub</span>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <span class="footer-note">An interactive chemistry reference</span>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <span class="footer-note">Data-driven · No hardcoded pages</span>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
